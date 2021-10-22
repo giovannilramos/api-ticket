@@ -3,10 +3,13 @@ package br.com.giovanniramos.ticket.entities;
 import lombok.Data;
 import org.w3c.dom.Text;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.persistence.OneToMany;
 import java.util.List;
 
 @Entity
@@ -15,8 +18,12 @@ public class Carrossel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private List<Evento> eventos;
+
+    @Lob
     private Text url;
+
+    @OneToMany
+    private List<Evento> eventos;
 
     public Carrossel() {
 

@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 
 @Entity
 @Data
@@ -19,7 +20,8 @@ public class Categoria {
     private String nome;
     @Column(nullable = false)
     private String descricao;
-    @Column(nullable = false)
+
+    @Lob
     private Text url;
 
     public Categoria() {

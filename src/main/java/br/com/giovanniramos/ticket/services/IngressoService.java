@@ -14,15 +14,16 @@ public class IngressoService {
     @Autowired
     private IngressoRepository rep;
 
-    public Ingresso findById(Long id) throws Exception{
-        Optional<Ingresso> ticket = this.rep.findById(id);
-        if (ticket.isPresent()) {
+    public Ingresso findById(final Long id) throws Exception{
+        Optional<Ingresso> ticket;
+        ticket = this.rep.findById(id);
+        if (ticket.isPresent())
             return ticket.get();
-        }
+
         throw new Exception("Ingresso não encontrado");
     }
 
-    public Ingresso findByCliente(Cliente cliente) throws Exception{
+    public Ingresso findByCliente(final Cliente cliente) throws Exception{
         Ingresso ticket = this.rep.findByCliente(cliente);
         if (ticket != null) {
             return ticket;
@@ -30,7 +31,7 @@ public class IngressoService {
         throw new Exception("Ingresso não encontrado");
     }
 
-    public Ingresso findByEvento(Evento evento) throws Exception {
+    public Ingresso findByEvento(final Evento evento) throws Exception {
         Ingresso ticket = this.rep.findByEvento(evento);
         if (ticket != null) {
             return ticket;
@@ -38,7 +39,7 @@ public class IngressoService {
         throw new Exception("Ingresso não encontrado");
     }
 
-    public void delete(Long id) throws Exception {
+    public void delete(final Long id) throws Exception {
         if (id == null)
             throw new Exception("Ingresso não encontrado");
         this.rep.deleteById(id);

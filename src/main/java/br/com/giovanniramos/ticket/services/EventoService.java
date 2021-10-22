@@ -1,7 +1,6 @@
 package br.com.giovanniramos.ticket.services;
 
 import br.com.giovanniramos.ticket.entities.Categoria;
-import br.com.giovanniramos.ticket.entities.Cliente;
 import br.com.giovanniramos.ticket.entities.Evento;
 import br.com.giovanniramos.ticket.repositories.EventoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +16,7 @@ public class EventoService {
     @Autowired
     private EventoRepository rep;
 
-    public Evento findById(Long id) throws Exception {
+    public Evento findById(final Long id) throws Exception {
         Optional<Evento> evento = this.rep.findById(id);
         if (evento.isPresent())
             return evento.get();
@@ -25,7 +24,7 @@ public class EventoService {
         throw new Exception("Evento não encontrado");
     }
 
-    public Evento save(Evento evento) throws Exception {
+    public Evento save(final Evento evento) throws Exception {
         if (evento == null)
             throw new Exception("Preencha todos os dados");
 
@@ -44,7 +43,7 @@ public class EventoService {
         return eventos;
     }
 
-    public List<Evento> findByNome(String nome) throws Exception {
+    public List<Evento> findByNome(final String nome) throws Exception {
         List<Evento> eventos = this.rep.findByNome(nome);
         if (eventos.isEmpty())
             throw new Exception("Evento não encontrado");
@@ -52,7 +51,7 @@ public class EventoService {
         return eventos;
     }
 
-    public List<Evento> findByLocal(String local) throws Exception {
+    public List<Evento> findByLocal(final String local) throws Exception {
         List<Evento> eventos = this.rep.findByLocal(local);
         if (eventos.isEmpty())
             throw new Exception("Local do evento não encontrado");
@@ -60,15 +59,15 @@ public class EventoService {
         return eventos;
     }
 
-    public List<Evento> findByData(Calendar dataEvento) throws Exception  {
-        List<Evento> eventos = this.rep.findByData(dataEvento);
+    public List<Evento> findByDataEvento(final Calendar dataEvento) throws Exception  {
+        List<Evento> eventos = this.rep.findByDataEvento(dataEvento);
         if (eventos.isEmpty())
             throw new Exception("Evento não encontrado");
 
         return eventos;
     }
 
-    public List<Evento> findByCategoria(Categoria categoria) throws Exception {
+    public List<Evento> findByCategoria(final Categoria categoria) throws Exception {
         List<Evento> eventos = this.rep.findByCategoria(categoria);
         if (eventos.isEmpty())
             throw new Exception("Evento não encontrado");
@@ -76,21 +75,25 @@ public class EventoService {
         return eventos;
     }
 
-    public Evento alterar(Evento evento) throws Exception {
-        var e = new Evento();
+    public Evento update(final Evento evento) throws Exception {
+        try {
+            var e = new Evento();
 
-        e.setNome(evento.getNome());
-        e.setCategoria(evento.getCategoria());
-        e.setDescricao(evento.getDescricao());
-        e.setLocal(evento.getLocal());
-        e.setPreco(evento.getPreco());
-        e.setDataEvento(evento.getDataEvento());
-        e.setUrl(evento.getUrl());
+            e.setNome(evento.getNome());
+            e.setCategoria(evento.getCategoria());
+            e.setDescricao(evento.getDescricao());
+            e.setLocal(evento.getLocal());
+            e.setPreco(evento.getPreco());
+            e.setDataEvento(evento.getDataEvento());
+            e.setUrl(evento.getUrl());
 
-        return this.rep.save(e);
+            return this.rep.save(e);
+        } catch (DataAccessException ex) {
+            throw new Exception("Erro na alteração dos dados");
+        }
     }
 
-    public void deletar(Long id) throws Exception {
+    public void delete(final Long id) throws Exception {
         if (id == null)
             throw new Exception("Evento não localizado");
         this.rep.deleteById(id);

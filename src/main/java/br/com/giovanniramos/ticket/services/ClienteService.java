@@ -14,7 +14,7 @@ public class ClienteService {
     @Autowired
     private ClienteRepository rep;
 
-    public Cliente findById(Long id) throws Exception{
+    public Cliente findById(final Long id) throws Exception{
         Optional<Cliente> cli;
         cli = this.rep.findById(id);
         if (cli.isPresent())
@@ -23,7 +23,7 @@ public class ClienteService {
         throw new Exception("Cliente não encontrado");
     }
 
-    public Cliente save(Cliente cli) throws Exception {
+    public Cliente save(final Cliente cli) throws Exception {
         if (cli == null)
             throw new Exception("Dados não fornecidos");
         try {
@@ -33,9 +33,12 @@ public class ClienteService {
         }
     }
 
-    public List<Cliente> findByNome(String nome) {
-        List<Cliente> lstCli = this.rep.findByNome(nome);
-        return lstCli;
+    public List<Cliente> findByNome(final String nome) throws Exception {
+        try {
+            return this.rep.findByNome(nome);
+        } catch (DataAccessException ex) {
+            throw new Exception("Nenhum nome econtrado");
+        }
     }
 
     public List<Cliente> todosClientes() throws Exception{
@@ -46,7 +49,7 @@ public class ClienteService {
         return clientes;
     }
 
-    public Cliente findByEmail(String email) throws Exception{
+    public Cliente findByEmail(final String email) throws Exception{
         Cliente cli = this.rep.findByEmail(email);
         if (cli == null) {
             throw new Exception("Nenhum email compativel");
@@ -54,15 +57,15 @@ public class ClienteService {
         return cli;
     }
 
-    public List<Cliente> findByFone(String fone) throws Exception{
-        List<Cliente> lstCli = this.rep.findByFone(fone);
+    public List<Cliente> findByCel(final String cel) throws Exception{
+        List<Cliente> lstCli = this.rep.findByCel(cel);
         if(lstCli.isEmpty()) {
             throw new Exception("Nenhum telefone encontrado");
         }
         return lstCli;
     }
 
-    public Cliente findByCpf(String cpf) throws Exception {
+    public Cliente findByCpf(final String cpf) throws Exception {
         Cliente cli;
         cli = this.rep.findByCpf(cpf);
         if (cli != null) {
@@ -71,18 +74,22 @@ public class ClienteService {
         throw new Exception("CPF não encontrado");
     }
 
-    public Cliente alterar(Cliente cli) throws Exception {
-        var cliente = new Cliente();
-        cliente.setNome(cli.getNome());
-        cliente.setCel(cli.getCel());
-        cliente.setCpf(cli.getCpf());
-        cliente.setEmail(cli.getEmail());
-        cliente.setSobreNome(cli.getSobreNome());
+    public Cliente update(final Cliente cli) throws Exception {
+        try {
+            var cliente = new Cliente();
+            cliente.setNome(cli.getNome());
+            cliente.setCel(cli.getCel());
+            cliente.setCpf(cli.getCpf());
+            cliente.setEmail(cli.getEmail());
+            cliente.setSobreNome(cli.getSobreNome());
 
-        return this.rep.save(cliente);
+            return this.rep.save(cliente);
+        } catch (DataAccessException ex) {
+            throw new Exception("Erro ao atualizar os dados");
+        }
     }
 
-    public void delete(Long id) throws Exception {
+    public void delete(final Long id) throws Exception {
         if (id == null)
             throw new Exception("Cliente não localizado");
         this.rep.deleteById(id);

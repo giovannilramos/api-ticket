@@ -18,25 +18,25 @@ import java.util.List;
 @RequestMapping("/clientes")
 public class ClienteController {
     @Autowired
-    ClienteService service;
+    private ClienteService service;
 
     @PostMapping
-    public Cliente save(@RequestBody Cliente cli) throws Exception  {
+    public Cliente save(@RequestBody final Cliente cli) throws Exception  {
         return this.service.save(cli);
     }
 
     @GetMapping("/{id}")
-    public Cliente obterPorId(@PathVariable Long id) throws Exception {
+    public Cliente findById(@PathVariable final Long id) throws Exception {
         return this.service.findById(id);
     }
 
     @GetMapping("/{nome}")
-    public List<Cliente> obterPorNome(@PathVariable String nome) throws Exception {
+    public List<Cliente> findByNome(@PathVariable final String nome) throws Exception {
         return this.service.findByNome(nome);
     }
 
     @GetMapping("/{email}")
-    public Cliente obterPorEmail(@PathVariable String email) throws Exception {
+    public Cliente findByEmail(@PathVariable final String email) throws Exception {
         return this.service.findByEmail(email);
     }
 
@@ -45,23 +45,23 @@ public class ClienteController {
         return this.service.todosClientes();
     }
 
-    @GetMapping("/{fone}")
-    public List<Cliente> obterPorFone(@PathVariable String fone) throws Exception {
-        return this.service.findByFone(fone);
+    @GetMapping("/{cel}")
+    public List<Cliente> findByCel(@PathVariable final String cel) throws Exception {
+        return this.service.findByCel(cel);
     }
 
-    @GetMapping("/cpf")
-    public Cliente obterPorCpf(@PathVariable String cpf) throws Exception {
+    @GetMapping("/{cpf}")
+    public Cliente findByCpf(@PathVariable final String cpf) throws Exception {
         return this.service.findByCpf(cpf);
     }
 
     @PutMapping("/{id}")
-    public Cliente alterar(@RequestBody Cliente cli) throws Exception {
-        return this.service.alterar(cli);
+    public Cliente update(@RequestBody final Cliente cli) throws Exception {
+        return this.service.update(cli);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@RequestBody Long id) throws Exception {
+    public void delete(@RequestBody final Long id) throws Exception {
         this.service.delete(id);
     }
 }

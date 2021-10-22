@@ -10,9 +10,9 @@ import java.util.Optional;
 @Service
 public class CarrosselService {
     @Autowired
-    CarrosselRepository rep;
+    private CarrosselRepository rep;
 
-    public Carrossel findById(Long id) throws Exception {
+    public Carrossel findById(final Long id) throws Exception {
         Optional<Carrossel> carrossel = this.rep.findById(id);
         if (carrossel.isPresent())
             return carrossel.get();

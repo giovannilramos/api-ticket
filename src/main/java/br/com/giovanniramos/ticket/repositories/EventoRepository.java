@@ -8,8 +8,8 @@ import java.util.Calendar;
 import java.util.List;
 
 public interface EventoRepository extends JpaRepository<Evento, Long> {
-    List<Evento> findByNome(String nome);
-    List<Evento> findByLocal(String local);
-    List<Evento> findByData(Calendar dataEvento);
-    List<Evento> findByCategoria(Categoria categoria);
+    List<Evento> findByNome(final String nome);
+    List<Evento> findByLocal(final String local);
+    List<Evento> findByDataEvento(final Calendar dataEvento);
+    List<Evento> findByCategoria(final Categoria categoria);
 }

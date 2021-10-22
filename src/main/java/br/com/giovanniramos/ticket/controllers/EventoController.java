@@ -20,20 +20,20 @@ import java.util.List;
 @RequestMapping("/eventos")
 public class EventoController {
     @Autowired
-    EventoService service;
+    private EventoService service;
 
     @PostMapping
-    public Evento save(@RequestBody Evento evento) throws Exception {
+    public Evento save(@RequestBody final Evento evento) throws Exception {
         return this.service.save(evento);
     }
 
     @GetMapping("/{id}")
-    public Evento obterPorId(@PathVariable Long id) throws Exception {
+    public Evento findById(@PathVariable final Long id) throws Exception {
         return this.service.findById(id);
     }
 
     @GetMapping("/{nome}")
-    public List<Evento> findByNome(@PathVariable String nome) throws Exception {
+    public List<Evento> findByNome(@PathVariable final String nome) throws Exception {
         return this.service.findByNome(nome);
     }
 
@@ -43,27 +43,27 @@ public class EventoController {
     }
 
     @GetMapping("/{local}")
-    public List<Evento> findByLocal(@PathVariable String local) throws Exception {
+    public List<Evento> findByLocal(@PathVariable final String local) throws Exception {
         return this.service.findByLocal(local);
     }
 
     @GetMapping("/{dataEvento}")
-    public List<Evento> findByData(@PathVariable Calendar dataEvento) throws Exception  {
-        return this.service.findByData(dataEvento);
+    public List<Evento> findByDataEvento(@PathVariable final Calendar dataEvento) throws Exception  {
+        return this.service.findByDataEvento(dataEvento);
     }
 
     @GetMapping("/{categoria}")
-    public List<Evento> findByCategoria(@PathVariable Categoria categoria) throws Exception {
+    public List<Evento> findByCategoria(@PathVariable final Categoria categoria) throws Exception {
         return this.service.findByCategoria(categoria);
     }
 
     @PutMapping("/{id}")
-    public Evento alterar(@PathVariable Evento evento) throws Exception {
-        return this.service.alterar(evento);
+    public Evento update(@PathVariable final Evento evento) throws Exception {
+        return this.service.update(evento);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) throws Exception {
-        this.service.deletar(id);
+    public void delete(@PathVariable final Long id) throws Exception {
+        this.service.delete(id);
     }
 }

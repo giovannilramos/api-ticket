@@ -15,25 +15,25 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/categoria")
 public class CategoriaController {
     @Autowired
-    CategoriaService service;
+    private CategoriaService service;
 
     @PostMapping
-    public Categoria save(@RequestBody Categoria categ) throws Exception{
+    public Categoria save(@RequestBody final Categoria categ) throws Exception{
         return this.service.save(categ);
     }
 
     @GetMapping("/{id}")
-    public Categoria obterPorId(@PathVariable Long id) throws Exception {
+    public Categoria findById(@PathVariable final Long id) throws Exception {
         return this.service.findById(id);
     }
 
     @GetMapping("/{nome}")
-    public Categoria findByNome(@PathVariable String nome) throws Exception {
+    public Categoria findByNome(@PathVariable final String nome) throws Exception {
         return this.service.findByNome(nome);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) throws Exception {
+    public void delete(@PathVariable final Long id) throws Exception {
         this.service.delete(id);
     }
 

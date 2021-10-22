@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.OneToOne;
 import java.util.Calendar;
 
@@ -25,10 +26,11 @@ public class Evento {
     private String local;
     @Column(unique = false, nullable = false)
     private float preco;
-    @Column(unique = false, nullable = false)
-    private Text url;
     @Column(nullable = false)
     private Calendar dataEvento;
+
+    @Lob
+    private Text url;
 
     @OneToOne
     private Cliente responsavel;

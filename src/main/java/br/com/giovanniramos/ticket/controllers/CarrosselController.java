@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/carrossel")
 public class CarrosselController {
     @Autowired
-    CarrosselService service;
+    private CarrosselService service;
 
     @GetMapping("/{id}")
-    public Carrossel obterPorId(@PathVariable Long id) throws Exception {
+    public Carrossel obterPorId(@PathVariable final Long id) throws Exception {
         return this.service.findById(id);
     }
 }
