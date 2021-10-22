@@ -76,12 +76,13 @@ public class ClienteService {
 
     public Cliente update(final Cliente cli) throws Exception {
         try {
-            var cliente = new Cliente();
-            cliente.setNome(cli.getNome());
-            cliente.setCel(cli.getCel());
-            cliente.setCpf(cli.getCpf());
-            cliente.setEmail(cli.getEmail());
-            cliente.setSobreNome(cli.getSobreNome());
+            final var cliente = Cliente.builder()
+                    .nome(cli.getNome())
+                    .cel(cli.getCel())
+                    .cpf(cli.getCpf())
+                    .email(cli.getEmail())
+                    .sobreNome(cli.getSobreNome())
+                    .build();
 
             return this.rep.save(cliente);
         } catch (DataAccessException ex) {

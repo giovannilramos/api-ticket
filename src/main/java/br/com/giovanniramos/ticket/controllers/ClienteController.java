@@ -30,12 +30,12 @@ public class ClienteController {
         return this.service.findById(id);
     }
 
-    @GetMapping("/{nome}")
+    @GetMapping("/name/{nome}")
     public List<Cliente> findByNome(@PathVariable final String nome) throws Exception {
         return this.service.findByNome(nome);
     }
 
-    @GetMapping("/{email}")
+    @GetMapping("/email/{email}")
     public Cliente findByEmail(@PathVariable final String email) throws Exception {
         return this.service.findByEmail(email);
     }
@@ -45,12 +45,12 @@ public class ClienteController {
         return this.service.todosClientes();
     }
 
-    @GetMapping("/{cel}")
+    @GetMapping("/cel/{cel}")
     public List<Cliente> findByCel(@PathVariable final String cel) throws Exception {
         return this.service.findByCel(cel);
     }
 
-    @GetMapping("/{cpf}")
+    @GetMapping("/cpf/{cpf}")
     public Cliente findByCpf(@PathVariable final String cpf) throws Exception {
         return this.service.findByCpf(cpf);
     }
