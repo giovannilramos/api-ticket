@@ -12,7 +12,7 @@ import java.util.Optional;
 @Service
 public class IngressoService {
     @Autowired
-    IngressoRepository rep;
+    private IngressoRepository rep;
 
     public Ingresso findById(Long id) throws Exception{
         Optional<Ingresso> ticket = this.rep.findById(id);
