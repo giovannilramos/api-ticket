@@ -12,7 +12,7 @@ public class CategoriaService {
     @Autowired
     CategoriaRepository rep;
 
-    public Categoria findById(Long id) throws Exception{
+    public Categoria findById(Long id) throws Exception {
         Optional<Categoria> categ = this.rep.findById(id);
         if (categ.isPresent()) {
             return categ.get();
@@ -20,11 +20,24 @@ public class CategoriaService {
         throw new Exception("Categoria não encontrada");
     }
 
-    public Categoria findByNome(String nome) throws Exception{
+    public Categoria save(Categoria categ) throws Exception {
+        if (categ == null)
+            throw new Exception("Erro ao registrar uma nova categoria");
+        Categoria categoria = this.rep.save(categ);
+        return categoria;
+    }
+
+    public Categoria findByNome(String nome) throws Exception {
         Categoria categ = this.rep.findByNome(nome);
         if(categ != null) {
             return categ;
         }
         throw new Exception("Categoria não encontrada");
+    }
+
+    public void delete(Long id) throws Exception {
+        if (id == null)
+            throw new Exception("Categoria não encontrada");
+        this.rep.deleteById(id);
     }
 }

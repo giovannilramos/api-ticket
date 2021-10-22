@@ -3,6 +3,7 @@ package br.com.giovanniramos.ticket.services;
 import br.com.giovanniramos.ticket.entities.Cliente;
 import br.com.giovanniramos.ticket.repositories.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,17 +23,35 @@ public class ClienteService {
         throw new Exception("Cliente não encontrado");
     }
 
+    public Cliente save(Cliente cli) throws Exception {
+        if (cli == null)
+            throw new Exception("Dados não fornecidos");
+        try {
+            return this.rep.save(cli);
+        } catch (DataAccessException ex) {
+            throw new Exception("Erro ao cadastrar");
+        }
+    }
+
     public List<Cliente> findByNome(String nome) {
         List<Cliente> lstCli = this.rep.findByNome(nome);
         return lstCli;
     }
 
-    public List<Cliente> findByEmail(String email) throws Exception{
-        List<Cliente> lstCli = this.rep.findByEmail(email);
-        if (lstCli.isEmpty()) {
+    public List<Cliente> todosClientes() throws Exception{
+        List<Cliente> clientes = this.rep.findAll();
+        if (clientes.isEmpty())
+            throw new Exception("Não há registros");
+
+        return clientes;
+    }
+
+    public Cliente findByEmail(String email) throws Exception{
+        Cliente cli = this.rep.findByEmail(email);
+        if (cli == null) {
             throw new Exception("Nenhum email compativel");
         }
-        return lstCli;
+        return cli;
     }
 
     public List<Cliente> findByFone(String fone) throws Exception{
@@ -50,6 +69,23 @@ public class ClienteService {
             return cli;
         }
         throw new Exception("CPF não encontrado");
+    }
+
+    public Cliente alterar(Cliente cli) throws Exception {
+        var cliente = new Cliente();
+        cliente.setNome(cli.getNome());
+        cliente.setCel(cli.getCel());
+        cliente.setCpf(cli.getCpf());
+        cliente.setEmail(cli.getEmail());
+        cliente.setSobreNome(cli.getSobreNome());
+
+        return this.rep.save(cliente);
+    }
+
+    public void delete(Long id) throws Exception {
+        if (id == null)
+            throw new Exception("Cliente não localizado");
+        this.rep.deleteById(id);
     }
 
 }

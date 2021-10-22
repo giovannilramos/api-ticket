@@ -37,4 +37,10 @@ public class IngressoService {
         }
         throw new Exception("Ingresso não encontrado");
     }
+
+    public void delete(Long id) throws Exception {
+        if (id == null)
+            throw new Exception("Ingresso não encontrado");
+        this.rep.deleteById(id);
+    }
 }
