@@ -1,5 +1,7 @@
 package br.com.giovanniramos.ticket.entities;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import org.w3c.dom.Text;
 
@@ -14,6 +16,8 @@ import java.util.Calendar;
 
 @Entity
 @Data
+@AllArgsConstructor
+@Builder
 public class Evento {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -36,20 +40,4 @@ public class Evento {
     private Cliente responsavel;
     @OneToOne
     private Categoria categoria;
-
-    public Evento() {
-
-    }
-
-    public Evento(Long id, String nome, String descricao, String local, float preco, Text url, Calendar dataEvento, Cliente responsavel, Categoria categoria) {
-        this.id = id;
-        this.nome = nome;
-        this.descricao = descricao;
-        this.local = local;
-        this.preco = preco;
-        this.url = url;
-        this.dataEvento = dataEvento;
-        this.responsavel = responsavel;
-        this.categoria = categoria;
-    }
 }

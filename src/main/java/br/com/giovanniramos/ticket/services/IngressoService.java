@@ -24,7 +24,7 @@ public class IngressoService {
         throw new TicketNotFoundException();
     }
 
-    public Ingresso findByCliente(final Cliente cliente) throws Exception{
+    public Ingresso findByCliente(final Cliente cliente) {
         Ingresso ticket = this.rep.findByCliente(cliente);
         if (ticket != null) {
             return ticket;
@@ -32,17 +32,17 @@ public class IngressoService {
         throw new TicketNotFoundException();
     }
 
-    public Ingresso findByEvento(final Evento evento) throws Exception {
+    public Ingresso findByEvento(final Evento evento) {
         Ingresso ticket = this.rep.findByEvento(evento);
         if (ticket != null) {
             return ticket;
         }
-        throw new Exception("Ingresso não encontrado");
+        throw new TicketNotFoundException();
     }
 
-    public void delete(final Long id) throws Exception {
+    public void delete(final Long id) {
         if (id == null)
-            throw new Exception("Ingresso não encontrado");
+            throw new TicketNotFoundException();
         this.rep.deleteById(id);
     }
 }

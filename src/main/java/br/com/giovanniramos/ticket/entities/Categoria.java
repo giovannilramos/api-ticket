@@ -1,5 +1,7 @@
 package br.com.giovanniramos.ticket.entities;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import org.w3c.dom.Text;
 
@@ -12,6 +14,8 @@ import javax.persistence.Lob;
 
 @Entity
 @Data
+@AllArgsConstructor
+@Builder
 public class Categoria {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -24,14 +28,4 @@ public class Categoria {
     @Lob
     private Text url;
 
-    public Categoria() {
-
-    }
-
-    public Categoria(Long id, String nome, String descricao, Text url) {
-        this.id = id;
-        this.nome = nome;
-        this.descricao = descricao;
-        this.url = url;
-    }
 }

@@ -1,5 +1,7 @@
 package br.com.giovanniramos.ticket.entities;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import org.w3c.dom.Text;
 
@@ -14,6 +16,8 @@ import java.util.List;
 
 @Entity
 @Data
+@AllArgsConstructor
+@Builder
 public class Carrossel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -24,14 +28,4 @@ public class Carrossel {
 
     @OneToMany
     private List<Evento> eventos;
-
-    public Carrossel() {
-
-    }
-
-    public Carrossel(Long id, List<Evento> eventos, Text url) {
-        this.id = id;
-        this.eventos = eventos;
-        this.url = url;
-    }
 }

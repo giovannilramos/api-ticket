@@ -1,5 +1,7 @@
 package br.com.giovanniramos.ticket.entities;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 
 import javax.persistence.Column;
@@ -12,6 +14,8 @@ import java.util.Calendar;
 
 @Entity
 @Data
+@AllArgsConstructor
+@Builder
 public class Ingresso {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,15 +30,4 @@ public class Ingresso {
     @OneToOne
     private Evento evento;
 
-    public Ingresso() {
-
-    }
-
-    public Ingresso(Long id, float preco, Calendar dataCompra, Cliente cliente, Evento evento) {
-        this.id = id;
-        this.preco = preco;
-        this.dataCompra = dataCompra;
-        this.cliente = cliente;
-        this.evento = evento;
-    }
 }

@@ -18,22 +18,23 @@ public class IngressoController {
     private IngressoService service;
 
     @GetMapping("/{id}")
-    public Ingresso findById(@PathVariable final Long id) throws Exception {
+    public Ingresso findById(@PathVariable final Long id) {
         return this.service.findById(id);
     }
 
-    @GetMapping("/{cliente}")
-    public Ingresso findByCliente(@PathVariable final Cliente cliente) throws Exception {
+    //findByCliente id
+    @GetMapping("/cliente/{clienteId}")
+    public Ingresso findByCliente(@PathVariable final Cliente cliente) {
         return this.service.findByCliente(cliente);
     }
 
-    @GetMapping("/{eventos}")
-    public Ingresso findByEvento(@PathVariable final Evento evento) throws Exception {
+    @GetMapping("/evento/{eventos}")
+    public Ingresso findByEvento(@PathVariable final Evento evento) {
         return this.service.findByEvento(evento);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable final Long id) throws Exception {
+    public void delete(@PathVariable final Long id) {
         this.service.delete(id);
     }
 }
